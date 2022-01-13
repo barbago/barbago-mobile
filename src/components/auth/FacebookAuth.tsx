@@ -1,8 +1,11 @@
 import { ResponseType } from 'expo-auth-session';
 import { useAuthRequest } from 'expo-auth-session/providers/facebook';
+import { maybeCompleteAuthSession } from 'expo-web-browser';
 import React, { useEffect } from 'react';
 import { Button } from 'react-native';
 import { useAuthService } from '../../services';
+
+maybeCompleteAuthSession();
 
 export const FacebookAuth = () => {
   const { signInFacebook } = useAuthService();

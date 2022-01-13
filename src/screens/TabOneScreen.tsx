@@ -4,8 +4,12 @@ import { StyleSheet } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../navigation/types';
-import { GoogleAuth, SignOut } from '../components';
-
+import {
+  AppleAuth,
+  FacebookAuth,
+  GoogleAuth,
+  SignOut,
+} from '../components';
 
 export function TabOneScreen({
   navigation,
@@ -20,6 +24,8 @@ export function TabOneScreen({
       />
       <EditScreenInfo path="/screens/TabOneScreen.tsx" />
       <GoogleAuth />
+      <FacebookAuth />
+      <AppleAuth />
       <SignOut />
     </View>
   );

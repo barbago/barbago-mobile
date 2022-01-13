@@ -1,28 +1,10 @@
-import React, { useEffect } from 'react';
-import { Button, StyleSheet } from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import { auth } from '../constants/firebase';
 
 export function TabTwoScreen() {
-  const checkToken = () => {
-    console.log(auth.currentUser);
-    auth.currentUser?.getIdToken().then((token) =>
-      fetch('http://localhost:5001/barbago-859cf/us-central1/api', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      }),
-    );
-  };
-
-  const checkClaims = () => {
-    auth.currentUser?.getIdTokenResult().then((idTokenResult) => {
-      console.log(idTokenResult);
-    });
-  };
 
   return (
     <View style={styles.container}>
@@ -33,8 +15,6 @@ export function TabTwoScreen() {
         darkColor="rgba(255,255,255,0.1)"
       />
       <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
-      <Button title="Check Token" onPress={checkToken} />
-      <Button title="Check Claims" onPress={checkClaims} />
     </View>
   );
 }

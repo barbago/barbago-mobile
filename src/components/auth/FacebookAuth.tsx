@@ -1,0 +1,34 @@
+import { ResponseType } from 'expo-auth-session';
+import { useAuthRequest } from 'expo-auth-session/providers/facebook';
+import React, { useEffect } from 'react';
+import { Button } from 'react-native';
+import { useAuthService } from '../../services';
+
+export const FacebookAuth = () => {
+  const { signInFacebook } = useAuthService();
+  const [request, response, promptAsync] = useAuthRequest({
+    responseType: ResponseType.Token,
+    clientId: '3025265811132416',
+  });
+
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { access_token } = response.params;
+      signInFacebook(access_token);
+    }
+  }, [response]);
+
+  return (
+    <Button
+      disabled={!request}
+      title="Continue with Facebook"
+      onPress={() => {
+        promptAsync();
+      }}
+    />
+  );
+};
+
+// https://docs.expo.io/guides/authentication/#facebook
+// https://developers.facebook.com/apps/3025265811132416/fb-login/settings/
+// https://derk-jan.com/2020/05/expo-facebook-login/

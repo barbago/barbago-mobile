@@ -1,5 +1,15 @@
 import {
+  AppleAuthenticationScope,
+  signInAsync,
+} from 'expo-apple-authentication';
+import {
+  CryptoDigestAlgorithm,
+  digestStringAsync,
+} from 'expo-crypto';
+import {
+  FacebookAuthProvider,
   GoogleAuthProvider,
+  OAuthProvider,
   onAuthStateChanged,
   signInAnonymously,
   signInWithCredential,
@@ -17,11 +27,11 @@ import React, {
 import { auth } from '../constants/firebase';
 
 export interface IAuthContext {
-  // signInApple: () => Promise<User>;
+  signInApple: () => Promise<User>;
   signInAnonymous: () => Promise<User>;
-  // signInEmail: (email: string, password: string) => Promise<User>;
+  signInEmail: (email: string, password: string) => Promise<User>;
   signInGoogle: (id_token: string) => Promise<User>;
-  // signInFacebook: () => Promise<User>;
+  signInFacebook: (access_token: string) => Promise<User>;
   signOut: () => Promise<void>;
   user: User | null;
 }
@@ -35,7 +45,6 @@ export const AuthServiceProvider: React.FC = ({ children }) => {
     try {
       const userCredential = await signInAnonymously(auth);
       const user = userCredential.user;
-      setUser(user);
       return user;
     } catch (err: any) {
       console.error('Failed to sign in anonymously!');
@@ -43,7 +52,34 @@ export const AuthServiceProvider: React.FC = ({ children }) => {
     }
   };
 
-  // const signInApple = async () => {};
+  const signInApple = async () => {
+    try {
+      const nonce = Math.random().toString(36).substring(2, 10);
+      const hashedNonce = await digestStringAsync(
+        CryptoDigestAlgorithm.SHA256,
+        nonce,
+      );
+      const appleCredential = await signInAsync({
+        requestedScopes: [
+          AppleAuthenticationScope.FULL_NAME,
+          AppleAuthenticationScope.EMAIL,
+        ],
+        nonce: hashedNonce,
+      });
+      const { identityToken } = appleCredential;
+      const provider = new OAuthProvider('apple.com');
+      const oAuthCredential = provider.credential({
+        idToken: identityToken!,
+        rawNonce: nonce,
+      });
+      const userCredential = await signInWithCredential(auth, oAuthCredential);
+      const user = userCredential.user;
+      return user;
+    } catch (err: any) {
+      console.log(err);
+      throw err;
+    }
+  };
 
   const signInEmail = async (email: string, password: string) => {
     try {
@@ -53,15 +89,30 @@ export const AuthServiceProvider: React.FC = ({ children }) => {
         password,
       );
       const user = credential.user;
-      setUser(user);
       return user;
     } catch (err: any) {
       console.error('Sign in with email failed!');
-      throw Error(err);
+      throw err;
     }
   };
 
-  // const signInFacebook = async () => {};
+  const signInFacebook = async (access_token: string) => {
+    try {
+      const credential =
+        FacebookAuthProvider.credential(access_token);
+
+      const userCredential = await signInWithCredential(
+        auth,
+        credential,
+      );
+
+      const user = userCredential.user;
+      return user;
+    } catch (err) {
+      console.error('Failed to sign in with Facebook!');
+      throw err;
+    }
+  };
 
   const signInGoogle = async (id_token: string) => {
     try {
@@ -73,7 +124,6 @@ export const AuthServiceProvider: React.FC = ({ children }) => {
       );
 
       const user = userCredential.user;
-      setUser(user);
       return user;
     } catch (err: any) {
       console.error('Failed to sign in with Google!');
@@ -87,9 +137,9 @@ export const AuthServiceProvider: React.FC = ({ children }) => {
 
   const value: IAuthContext = {
     signInAnonymous,
-    // signInApple,
-    // signInEmail,
-    // signInFacebook,
+    signInApple,
+    signInEmail,
+    signInFacebook,
     signInGoogle,
     signOut,
     user,
@@ -117,10 +167,6 @@ export const useAuthService = () => {
   return authContext;
 };
 
-// https://blog.testdouble.com/posts/2021-03-19-react-context-for-dependency-injection-not-state/
-
-// Hooks implementation
-// https://medium.com/the-guild/injectable-services-in-react-de0136b6d476
 
 /*
 TODO
@@ -130,4 +176,6 @@ https://firebase.google.com/docs/auth/web/anonymous-auth#web-version-9_5
 
 implement proper login/signup with email
 
+active apple developer account 
+https://medium.com/nerd-for-tech/apple-google-authentication-in-expo-apps-using-firebase-997125440032#b10b
 */

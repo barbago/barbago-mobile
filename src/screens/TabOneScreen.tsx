@@ -8,6 +8,7 @@ import {
   AppleAuth,
   FacebookAuth,
   GoogleAuth,
+  NoAuth,
   SignOut,
 } from '../components';
 
@@ -26,6 +27,7 @@ export function TabOneScreen({
       <GoogleAuth />
       <FacebookAuth />
       <AppleAuth />
+      <NoAuth />
       <SignOut />
     </View>
   );

@@ -9,6 +9,7 @@ import {
 import { FirebaseError } from 'firebase/app';
 import {
   AuthCredential,
+  createUserWithEmailAndPassword,
   FacebookAuthProvider,
   GoogleAuthProvider,
   OAuthProvider,
@@ -60,11 +61,7 @@ const handleFirebaseError = (error: FirebaseError) => {
 
 const signInCredential = async (credential: AuthCredential) => {
   try {
-    const userCredential = await signInWithCredential(
-      auth,
-      credential,
-    );
-    console.log(userCredential.user);
+    await signInWithCredential(auth, credential);
   } catch (err: any) {
     if (err instanceof FirebaseError) handleFirebaseError(err);
     else console.error(err);
@@ -72,7 +69,7 @@ const signInCredential = async (credential: AuthCredential) => {
 };
 
 const signInAnonymous = async () => {
-  const userCredential = await signInAnonymously(auth);
+  await signInAnonymously(auth);
 };
 
 const signInApple = async () => {
@@ -134,12 +131,14 @@ export interface IAuthContext {
   signInFacebook: (access_token: string) => Promise<void>;
   signOut: () => Promise<void>;
   user: User | null;
+  roles: string[];
 }
 
 export const AuthContext = createContext<IAuthContext>(null!);
 
 export const AuthServiceProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [roles, setRoles] = useState<string[]>([]);
 
   const value: IAuthContext = {
     signInAnonymous,
@@ -149,12 +148,16 @@ export const AuthServiceProvider: React.FC = ({ children }) => {
     signInGoogle,
     signOut,
     user,
+    roles,
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log('user: ', user);
       setUser(user);
+      user?.getIdTokenResult().then(({ claims }) => {
+        const roles = (claims?.roles as string[]) ?? [];
+        setRoles(roles);
+      });
     });
     return unsubscribe;
   }, []);

@@ -29,7 +29,7 @@ import {
 } from './types';
 import LinkingConfiguration from './LinkingConfiguration';
 
-export default function Navigation({
+export function Navigation({
   colorScheme,
 }: {
   colorScheme: ColorSchemeName;

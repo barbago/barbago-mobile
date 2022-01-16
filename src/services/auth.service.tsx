@@ -123,6 +123,12 @@ const signOut = async () => {
   await firebaseSignout(auth);
 };
 
+export enum Role {
+  ADMIN = 'ADMIN',
+  BARBER = 'BARBER',
+  CLIENT = 'CLIENT',
+}
+
 export interface IAuthContext {
   signInApple: () => Promise<void>;
   signInAnonymous: () => Promise<void>;
@@ -130,15 +136,25 @@ export interface IAuthContext {
   signInGoogle: (id_token: string) => Promise<void>;
   signInFacebook: (access_token: string) => Promise<void>;
   signOut: () => Promise<void>;
+  isAdmin: boolean;
+  isBarber: boolean;
+  isClient: boolean;
   user: User | null;
-  roles: string[];
+  roles: Role[];
 }
 
 export const AuthContext = createContext<IAuthContext>(null!);
 
 export const AuthServiceProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [roles, setRoles] = useState<string[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
+
+  const hasRole = (...testRoles: Role[]): boolean =>
+    roles.some((v) => testRoles.includes(v));
+
+  const isAdmin = hasRole(Role.ADMIN);
+  const isBarber = hasRole(Role.ADMIN, Role.BARBER);
+  const isClient = hasRole(Role.ADMIN, Role.BARBER, Role.CLIENT);
 
   const value: IAuthContext = {
     signInAnonymous,
@@ -147,17 +163,20 @@ export const AuthServiceProvider: React.FC = ({ children }) => {
     signInFacebook,
     signInGoogle,
     signOut,
+    isAdmin,
+    isBarber,
+    isClient,
     user,
     roles,
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      const roles =
+        ((await user?.getIdTokenResult())?.claims?.roles as Role[]) ??
+        [];
       setUser(user);
-      user?.getIdTokenResult().then(({ claims }) => {
-        const roles = (claims?.roles as string[]) ?? [];
-        setRoles(roles);
-      });
+      setRoles(roles);
     });
     return unsubscribe;
   }, []);

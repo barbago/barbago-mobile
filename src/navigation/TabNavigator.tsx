@@ -35,7 +35,7 @@ export function TabNavigator({
       <BottomTab.Screen
         name="SettingsStack"
         component={SettingsNavigator}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, title: 'Settings' }}
       />
     </BottomTab.Navigator>
   );

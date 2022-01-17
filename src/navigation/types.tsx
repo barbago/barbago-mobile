@@ -17,6 +17,7 @@ declare global {
 }
 
 export type RootStackParamList = {
+  Welcome?: undefined;
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   NotFound: undefined;
 };
@@ -26,12 +27,10 @@ export type RootStackScreenProps<
 > = NativeStackScreenProps<RootStackParamList, Screen>;
 
 export type RootTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
   Home: undefined;
   Search: undefined;
   Messages: undefined;
-  Settings: undefined;
+  SettingsStack: NavigatorScreenParams<SettingsStackParamList>;
 };
 
 export type RootTabScreenProps<
@@ -42,12 +41,14 @@ export type RootTabScreenProps<
 >;
 
 export type SettingsStackParamList = {
+  Settings: undefined;
   'Contact Us': undefined;
   'Learn More': undefined;
   'Terms of Service': undefined;
   'Privacy Policy': undefined;
 };
 
+// Missing data from tab params
 export type SettingsStackScreenProps<
   Screen extends keyof SettingsStackParamList,
 > = NativeStackScreenProps<SettingsStackParamList, Screen>;

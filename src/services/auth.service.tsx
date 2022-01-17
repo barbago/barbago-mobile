@@ -2,6 +2,7 @@ import {
   AppleAuthenticationScope,
   signInAsync,
 } from 'expo-apple-authentication';
+import AppLoading from 'expo-app-loading';
 import {
   CryptoDigestAlgorithm,
   digestStringAsync,
@@ -148,6 +149,7 @@ export const AuthContext = createContext<IAuthContext>(null!);
 export const AuthServiceProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [roles, setRoles] = useState<Role[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const hasRole = (...testRoles: Role[]): boolean =>
     roles.some((v) => testRoles.includes(v));
@@ -171,21 +173,25 @@ export const AuthServiceProvider: React.FC = ({ children }) => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       const roles =
         ((await user?.getIdTokenResult())?.claims?.roles as Role[]) ??
         [];
       setUser(user);
       setRoles(roles);
+      setIsLoading(false);
     });
     return unsubscribe;
   }, []);
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  if (isLoading) return <AppLoading />;
+  else
+    return (
+      <AuthContext.Provider value={value}>
+        {children}
+      </AuthContext.Provider>
+    );
 };
 
 export const useAuthService = () => {

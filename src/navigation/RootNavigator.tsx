@@ -1,0 +1,39 @@
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import * as React from 'react';
+
+import { RootStackParamList } from './types';
+import { NotFoundScreen, WelcomeSwiper } from '../screens';
+import { TabNavigator } from './TabNavigator';
+import { useAuthService } from '../services';
+
+/**
+ * A root stack navigator is often used for displaying modals on top of all other content.
+ * https://reactnavigation.org/docs/modal
+ */
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+export function RootNavigator() {
+  const { user } = useAuthService();
+
+  return (
+    <Stack.Navigator>
+      {!user && (
+        <Stack.Screen name="Welcome" component={WelcomeSwiper} />
+      )}
+      <Stack.Screen
+        name="Root"
+        component={TabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NotFound"
+        component={NotFoundScreen}
+        options={{ title: 'Oops!' }}
+      />
+      {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Screen name="Modal" component={ModalScreen} />
+      </Stack.Group> */}
+      {/* Think I might add a LoginPage here */}
+    </Stack.Navigator>
+  );
+}

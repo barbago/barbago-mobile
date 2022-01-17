@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { Image, ListRenderItemInfo } from 'react-native';
+import { ListRenderItemInfo } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 
-import { View, Text } from '../../components/Themed';
+import { Text } from '../../components/Themed';
 import { useColorScheme } from '../../hooks';
-import { RootTabScreenProps } from '../../navigation/types';
+import { RootStackScreenProps } from '../../navigation/types';
 
 interface SlideItem {
   key: number;
@@ -42,11 +42,11 @@ function renderItem({ item }: ListRenderItemInfo<SlideItem>) {
 
 export function WelcomeSwiper({
   navigation,
-}: RootTabScreenProps<'TabTwo'>) {
+}: RootStackScreenProps<'Welcome'>) {
   const theme = useColorScheme();
 
   const onDone = () => {
-    navigation.navigate('TabOne');
+    navigation.navigate('Root');
   };
 
   return (

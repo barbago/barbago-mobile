@@ -1,3 +1,3 @@
 export { AppleAuth, FacebookAuth, GoogleAuth, NoAuth, SignOut } from './auth';
-export { default as EditScreenInfo } from './EditScreenInfo';
-export { MonoText } from './StyledText';
+export { MonoText } from './Themed/StyledText';
+export * from './Themed';

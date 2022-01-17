@@ -13,16 +13,36 @@ const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.makeUrl('/')],
   config: {
     screens: {
+      Welcome: {
+        screens: {
+          Welcome: 'welcome',
+        },
+      },
       Root: {
         screens: {
-          TabOne: {
+          Home: {
             screens: {
-              TabOneScreen: 'one',
+              Home: 'home',
             },
           },
-          TabTwo: {
+          Search: {
             screens: {
-              TabTwoScreen: 'two',
+              Search: 'search',
+            },
+          },
+          Messages: {
+            screens: {
+              Messages: 'messages',
+            },
+          },
+          // Todo: Include settings subpages
+          SettingsStack: {
+            screens: {
+              Settings: 'settings',
+              'Contact Us': 'contact-us',
+              'Learn More': 'learn-more',
+              'Privacy Policy': 'privacy',
+              'Terms of Service': 'terms',
             },
           },
         },

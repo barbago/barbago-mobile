@@ -3,5 +3,6 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
+export * from './Screen';
 export * from './Text';
 export * from './View';

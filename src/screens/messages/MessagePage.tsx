@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from '../../components';
+import { Screen, Text, View } from '../../components';
 import { RootTabScreenProps } from '../../navigation/types';
 import { useAuthService } from '../../services';
 
@@ -8,8 +8,8 @@ export const MessagePage: React.FC<
 > = ({ navigation, children }) => {
   const { user } = useAuthService();
   return (
-    <View>
+    <Screen>
       <Text>Message Page</Text>
-    </View>
+    </Screen>
   );
 };

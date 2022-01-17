@@ -35,7 +35,6 @@ const linking: LinkingOptions<RootStackParamList> = {
               Messages: 'messages',
             },
           },
-          // Todo: Include settings subpages
           SettingsStack: {
             screens: {
               Settings: 'settings',

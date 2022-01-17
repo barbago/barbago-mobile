@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Text } from '../../components';
+import { View, Text, Screen } from '../../components';
 import { SettingsStackScreenProps } from '../../navigation';
 
 export const SettingsPage = ({
   navigation,
 }: SettingsStackScreenProps<'Settings'>) => {
   return (
-    <View>
+    <Screen>
       <Text>Settings Page</Text>
-    </View>
+    </Screen>
   );
 };

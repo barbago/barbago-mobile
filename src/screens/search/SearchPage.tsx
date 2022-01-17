@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from '../../components';
+import { View, Text, Screen } from '../../components';
 import { RootTabScreenProps } from '../../navigation/types';
 
 export const SearchPage: React.FC<RootTabScreenProps<'Search'>> = ({
@@ -7,8 +7,8 @@ export const SearchPage: React.FC<RootTabScreenProps<'Search'>> = ({
   navigation,
 }) => {
   return (
-    <View>
+    <Screen>
       <Text>Search Page</Text>
-    </View>
+    </Screen>
   );
 };

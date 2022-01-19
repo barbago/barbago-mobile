@@ -12,3 +12,4 @@ export const SearchPage: React.FC<RootTabScreenProps<'Search'>> = ({
     </Screen>
   );
 };
+

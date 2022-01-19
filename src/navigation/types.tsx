@@ -48,7 +48,9 @@ export type SettingsStackParamList = {
   'Privacy Policy': undefined;
 };
 
-// Missing data from tab params
 export type SettingsStackScreenProps<
   Screen extends keyof SettingsStackParamList,
-> = NativeStackScreenProps<SettingsStackParamList, Screen>;
+> = CompositeScreenProps<
+  NativeStackScreenProps<SettingsStackParamList, Screen>,
+  BottomTabScreenProps<RootTabParamList>
+>;

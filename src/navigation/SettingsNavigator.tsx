@@ -17,6 +17,7 @@ export function SettingsNavigator({
         component={SettingsPage}
         options={{ headerShown: false }}
       />
+      {/* Web Screens should not be a screen */}
       {/* <Stack.Screen name="Contact Us" component={() => null} />
       <Stack.Screen name="Learn More" component={() => null} />
       <Stack.Screen name="Privacy Policy" component={() => null} />

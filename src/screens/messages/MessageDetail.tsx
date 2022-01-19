@@ -8,3 +8,4 @@ export const MessageDetail = () => {
     </View>
   );
 };
+

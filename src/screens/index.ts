@@ -1,8 +1,8 @@
-export * from './home';
-export * from './messages';
-export * from './notfound';
-export * from './search';
-export * from './settings';
-export * from './welcome';
+export * from './Home';
+export * from './Messages';
+export * from './NotFound';
+export * from './Search';
+export * from './Settings';
+export * from './Welcome';
 
 export { TabOneScreen } from './TabOneScreen';

@@ -13,3 +13,4 @@ export const MessagePage: React.FC<
     </Screen>
   );
 };
+

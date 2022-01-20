@@ -16,8 +16,11 @@ export function Screen(props: ScreenProps) {
     { light: lightColor, dark: darkColor },
     'background',
   );
+  const defaultStyle = {
+    width: '100%',
+    height: '100%',
+    backgroundColor,
+  };
 
-  return (
-    <SafeArea style={[{ backgroundColor }, style]} {...otherProps} />
-  );
+  return <SafeArea style={[defaultStyle, style]} {...otherProps} />;
 }

@@ -29,6 +29,13 @@
       }
     },
     "web": {
+      "build": {
+        "babel": {
+          "include": [
+            "react-leaflet"
+          ]
+        }
+      },
       "favicon": "./src/assets/images/favicon.png"
     },
     "description": "",

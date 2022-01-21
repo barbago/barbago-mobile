@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
-import { Button } from 'react-native';
 import { Modalize } from 'react-native-modalize';
-import { Text, Screen } from '../../components';
+import { Text, Screen, Modal } from '../../components';
 import { RootTabScreenProps } from '../../navigation/types';
 import { Map } from './Map';
 
@@ -12,21 +11,11 @@ export const SearchPage: React.FC<RootTabScreenProps<'Search'>> = ({
   const modalizeRef = useRef<Modalize>(null);
 
   return (
-    <Screen>
-      <Button
-        title="Open"
-        onPress={() => {
-          modalizeRef.current?.open();
-        }}
-      />
+    <Screen edges={['top']}>
       <Map />
-      <Modalize
-        ref={modalizeRef}
-        handlePosition="inside"
-        modalStyle={{ shadowRadius: 16 }}
-      >
-        <Text>AAaa</Text>
-      </Modalize>
+      <Modal ref={modalizeRef}>
+        <Text>AAA</Text>
+      </Modal>
     </Screen>
   );
 };

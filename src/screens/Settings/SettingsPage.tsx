@@ -6,7 +6,7 @@ export const SettingsPage = ({
   navigation,
 }: SettingsStackScreenProps<'Settings'>) => {
   return (
-    <Screen>
+    <Screen edges={["top"]}>
       <Text>Settings Page</Text>
     </Screen>
   );

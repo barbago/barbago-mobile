@@ -33,9 +33,8 @@ export function Screen({
   };
 
   return (
-    <SafeAreaView edges={[]} style={[defaultStyle, style]} {...rest}>
+    <SafeAreaView edges={['bottom']} style={[defaultStyle, style]} {...rest}>
       {children}
-      <StatusBar />
     </SafeAreaView>
   );
 }

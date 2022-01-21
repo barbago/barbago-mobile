@@ -2,11 +2,11 @@ import AppLoading from 'expo-app-loading';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 
-import { useCachedResources, useColorScheme } from './src/hooks';
-import { Navigation } from './src/navigation';
-import { ContextProvider } from './src/services';
+import { useCachedResources, useColorScheme } from './hooks';
+import { Navigation } from './navigation';
+import { ContextProvider } from './services';
 
-export default function App() {
+export function App() {
   const resourcesLoaded = useCachedResources();
   const colorScheme = useColorScheme();
 
@@ -21,3 +21,4 @@ export default function App() {
     );
   }
 }
+

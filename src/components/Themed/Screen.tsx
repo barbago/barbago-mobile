@@ -1,5 +1,9 @@
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { SafeAreaView as SafeArea } from 'react-native';
+import {
+  NativeSafeAreaViewProps as SafeAreaProps,
+  SafeAreaView,
+} from 'react-native-safe-area-context';
 
 import { useThemeColor } from '../../hooks';
 
@@ -8,10 +12,15 @@ type ThemeProps = {
   darkColor?: string;
 };
 
-export type ScreenProps = ThemeProps & SafeArea['props'];
+export type ScreenProps = ThemeProps & SafeAreaProps;
 
-export function Screen(props: ScreenProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
+export function Screen({
+  style,
+  lightColor,
+  darkColor,
+  children,
+  ...rest
+}: ScreenProps) {
   const backgroundColor = useThemeColor(
     { light: lightColor, dark: darkColor },
     'background',
@@ -20,7 +29,15 @@ export function Screen(props: ScreenProps) {
     width: '100%',
     height: '100%',
     backgroundColor,
+    // padding: 16,
   };
 
-  return <SafeArea style={[defaultStyle, style]} {...otherProps} />;
+  return (
+    <SafeAreaView edges={[]} style={[defaultStyle, style]} {...rest}>
+      {children}
+      <StatusBar />
+    </SafeAreaView>
+  );
 }
+
+// RNGestureHandlerModule.attachGestureHandler got 3 arguments, expected 2

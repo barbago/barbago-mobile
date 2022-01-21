@@ -15,10 +15,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.barbagoapp.mobile",
       "supportsTablet": true,
       "usesAppleSignIn": true
     },
@@ -26,14 +25,18 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "config": {
+        "googleMaps": {
+          "apiKey": ""
+        }
+      },
+      "package": "com.barbagoapp.mobile"
     },
     "web": {
       "build": {
         "babel": {
-          "include": [
-            "react-leaflet"
-          ]
+          "include": ["react-leaflet"]
         }
       },
       "favicon": "./src/assets/images/favicon.png"

@@ -26,3 +26,9 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
   },
 });
+
+/**
+ * https://docs.expo.dev/versions/latest/sdk/map-view/#deploying-google-maps-to-an-ios-standalone
+ * https://github.com/react-native-maps/react-native-maps/blob/master/example/examples/CustomTiles.js
+ * https://github.com/react-native-maps/react-native-maps#customizing-the-map-style
+ */

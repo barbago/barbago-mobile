@@ -38,5 +38,3 @@ export function Screen({
     </SafeAreaView>
   );
 }
-
-// RNGestureHandlerModule.attachGestureHandler got 3 arguments, expected 2

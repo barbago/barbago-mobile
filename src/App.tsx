@@ -4,7 +4,7 @@ import React from 'react';
 
 import { useCachedResources, useColorScheme } from './hooks';
 import { Navigation } from './navigation';
-import { ContextProvider } from './services';
+import { ContextProvider } from './providers';
 
 export function App() {
   const resourcesLoaded = useCachedResources();

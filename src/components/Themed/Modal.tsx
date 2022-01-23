@@ -22,3 +22,5 @@ export const Modal = forwardRef<Modalize, ModalizeProps>(
     );
   },
 );
+
+// https://jeremybarbet.github.io/react-native-modalize/#/EXAMPLES

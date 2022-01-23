@@ -3,12 +3,12 @@ import { useAuthRequest } from 'expo-auth-session/providers/facebook';
 import { maybeCompleteAuthSession } from 'expo-web-browser';
 import React, { useEffect } from 'react';
 import { Button } from 'react-native';
-import { useAuthService } from '../../services';
+import { useAuth } from '../../hooks';
 
 maybeCompleteAuthSession();
 
 export const FacebookAuth = () => {
-  const { signInFacebook } = useAuthService();
+  const { signInFacebook } = useAuth();
   const [request, response, promptAsync] = useAuthRequest({
     responseType: ResponseType.Token,
     clientId: '3025265811132416',

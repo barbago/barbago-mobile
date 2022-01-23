@@ -146,7 +146,7 @@ export interface IAuthContext {
 
 export const AuthContext = createContext<IAuthContext>(null!);
 
-export const AuthServiceProvider: React.FC = ({ children }) => {
+export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [roles, setRoles] = useState<Role[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -194,12 +194,6 @@ export const AuthServiceProvider: React.FC = ({ children }) => {
     );
 };
 
-export const useAuthService = () => {
-  const authContext = useContext(AuthContext);
-  if (!authContext)
-    throw Error('Cannot useAuthService outside a provider');
-  return authContext;
-};
 
 /*
 TODO

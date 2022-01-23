@@ -6,10 +6,10 @@ import {
   AppleAuthenticationButtonStyle,
   AppleAuthenticationButtonType,
 } from 'expo-apple-authentication';
-import { useAuthService } from '../../services';
+import { useAuth } from '../../hooks';
 
 export const AppleAuth = () => {
-  const { signInApple } = useAuthService();
+  const { signInApple } = useAuth();
   const [isAppleReady, setIsAppleReady] = useState(false);
 
   useEffect(() => {

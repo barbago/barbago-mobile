@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from 'react-native';
-import { useAuthService } from '../../services';
+import { useAuth } from '../../hooks';
 
 export const SignOut = () => {
-  const { user, signOut } = useAuthService();
+  const { user, signOut } = useAuth();
 
   return (
     <Button title="Sign out" disabled={!user} onPress={signOut} />

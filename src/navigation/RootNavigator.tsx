@@ -4,7 +4,7 @@ import * as React from 'react';
 import { RootStackParamList } from './types';
 import { NotFoundScreen, WelcomeSwiper } from '../screens';
 import { TabNavigator } from './TabNavigator';
-import { useAuthService } from '../services';
+import { useAuth } from '../hooks';
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
@@ -13,7 +13,7 @@ import { useAuthService } from '../services';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
-  const { user } = useAuthService();
+  const { user } = useAuth();
 
   return (
     <Stack.Navigator>

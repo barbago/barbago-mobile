@@ -1,16 +1,15 @@
 import React from 'react';
 import { Screen, Text, View } from '../../components';
 import { RootTabScreenProps } from '../../navigation/types';
-import { useAuthService } from '../../services';
+import { useAuth } from '../../hooks';
 
 export const MessagePage: React.FC<
   RootTabScreenProps<'Messages'>
 > = ({ navigation, children }) => {
-  const { user } = useAuthService();
+  const { user } = useAuth();
   return (
     <Screen>
       <Text>Message Page</Text>
     </Screen>
   );
 };
-

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from 'react-native';
 
-import { useAuthService } from '../../services';
+import { useAuth } from '../../hooks';
 
 export function NoAuth() {
-  const { signInAnonymous } = useAuthService();
+  const { signInAnonymous } = useAuth();
   return (
     <Button
       onPress={signInAnonymous}

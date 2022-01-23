@@ -6,7 +6,7 @@ import { Colors } from '../constants';
 import { useColorScheme } from '../hooks';
 import { RootTabParamList } from './types';
 import { HomePage, MessagePage, SearchPage } from '../screens';
-import { useAuthService } from '../services';
+import { useAuth } from '../hooks';
 import { SettingsNavigator } from './SettingsNavigator';
 import { RootStackScreenProps } from './types';
 
@@ -15,7 +15,7 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 export function TabNavigator({
   navigation,
 }: RootStackScreenProps<'Root'>) {
-  const { user } = useAuthService();
+  const { user } = useAuth();
   const colorScheme = useColorScheme();
 
   return (

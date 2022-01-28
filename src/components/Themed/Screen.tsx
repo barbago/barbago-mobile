@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { ScrollView } from 'react-native';
 import {
   NativeSafeAreaViewProps as SafeAreaProps,
   SafeAreaView,
@@ -7,18 +7,23 @@ import {
 
 import { useThemeColor } from '../../hooks';
 
+type ScrollProps = {
+  scrolling?: boolean;
+};
+
 type ThemeProps = {
   lightColor?: string;
   darkColor?: string;
 };
 
-export type ScreenProps = ThemeProps & SafeAreaProps;
+export type ScreenProps = ScrollProps & ThemeProps & SafeAreaProps;
 
 export function Screen({
   style,
   lightColor,
   darkColor,
   children,
+  scrolling = true,
   ...rest
 }: ScreenProps) {
   const backgroundColor = useThemeColor(
@@ -29,12 +34,19 @@ export function Screen({
     width: '100%',
     height: '100%',
     backgroundColor,
-    // padding: 16,
   };
 
   return (
-    <SafeAreaView edges={['bottom']} style={[defaultStyle, style]} {...rest}>
-      {children}
+    <SafeAreaView
+      edges={['bottom']}
+      style={[defaultStyle, style]}
+      {...rest}
+    >
+      {scrolling ? (
+        <ScrollView>{children}</ScrollView>
+      ) : (
+        <>{children}</>
+      )}
     </SafeAreaView>
   );
 }

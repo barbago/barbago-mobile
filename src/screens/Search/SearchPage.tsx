@@ -11,7 +11,7 @@ export const SearchPage: React.FC<RootTabScreenProps<'Search'>> = ({
   const modalizeRef = useRef<Modalize>(null);
 
   return (
-    <Screen edges={['top']}>
+    <Screen edges={['top']} scrolling={false}>
       <Map />
       <Modal ref={modalizeRef}>
         <Text>AAA</Text>

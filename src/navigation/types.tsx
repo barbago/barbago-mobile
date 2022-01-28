@@ -43,9 +43,10 @@ export type RootTabScreenProps<
 export type SettingsStackParamList = {
   Settings: undefined;
   'Contact Us': undefined;
-  'Learn More': undefined;
-  'Terms of Service': undefined;
-  'Privacy Policy': undefined;
+  Account: undefined;
+  Notifications: undefined;
+  'Payment Details': undefined;
+  Preferences: undefined;
 };
 
 export type SettingsStackScreenProps<

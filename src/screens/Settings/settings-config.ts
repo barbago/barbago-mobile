@@ -89,3 +89,5 @@ export const settingsConfig: SettingSection[] = [
     ],
   },
 ];
+
+// Icons: https://materialdesignicons.com/

@@ -56,17 +56,19 @@ export const settingsConfig: SettingSection[] = [
         title: 'Learn More',
         leftIcon: 'information',
         rightIcon: 'open-in-app',
-        link: '',
+        link: 'https://barbagoapp.com/privacy',
       },
       {
         title: 'Terms of Service',
         leftIcon: 'file-document-edit',
         rightIcon: 'open-in-app',
+        link: 'https://barbagoapp.com/tos'
       },
       {
         title: 'Privacy Policy',
         leftIcon: 'eye-off',
         rightIcon: 'open-in-app',
+        link: 'https://barbagoapp.com/privacy'
       },
     ],
   },

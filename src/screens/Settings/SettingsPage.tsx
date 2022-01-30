@@ -1,3 +1,4 @@
+import { openBrowserAsync } from 'expo-web-browser';
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { List } from 'react-native-paper';
@@ -42,8 +43,7 @@ export const SettingsPage = ({
                   }
                   onPress={() => {
                     if (navigate) navigation.push(navigate);
-                    if (link) {
-                    }
+                    if (link) openBrowserAsync(link);
                   }}
                 />
               ),

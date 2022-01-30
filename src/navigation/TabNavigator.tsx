@@ -10,7 +10,7 @@ import { useAuth } from '../hooks';
 import { SettingsNavigator } from './SettingsNavigator';
 import { RootStackScreenProps } from './types';
 
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const Tab = createBottomTabNavigator<RootTabParamList>();
 
 export function TabNavigator({
   navigation,
@@ -19,27 +19,30 @@ export function TabNavigator({
   const colorScheme = useColorScheme();
 
   return (
-    <BottomTab.Navigator
+    <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: Colors[colorScheme].tabIconSelected,
       }}
     >
-      <BottomTab.Screen name="Home" component={HomePage} />
-      <BottomTab.Screen
+      <Tab.Screen name="Home" component={HomePage} />
+      <Tab.Screen
         name="Search"
         component={SearchPage}
         options={{ headerShown: false }}
       />
-      <BottomTab.Screen name="Messages" component={MessagePage} />
-      <BottomTab.Screen
+      <Tab.Screen name="Messages" component={MessagePage} />
+      <Tab.Screen
         name="SettingsStack"
         component={SettingsNavigator}
         options={{ headerShown: false, title: 'Settings' }}
       />
-    </BottomTab.Navigator>
+    </Tab.Navigator>
   );
 }
+
+
+
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/

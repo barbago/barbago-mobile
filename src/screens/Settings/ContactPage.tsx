@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { Linking } from 'react-native';
-import { Button, Card, List, TextInput } from 'react-native-paper';
-import { Screen } from '../../components';
+import { useForm, FieldValues } from 'react-hook-form';
+import { Button, Card, List, Menu } from 'react-native-paper';
+import { Screen, ValidTextInput } from '../../components';
+
 export const ContactPage = () => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const { control, handleSubmit } = useForm();
+
+  const onSubmit = (data: FieldValues) => {
+    alert('SUCCESS! ' + JSON.stringify(data));
+  };
+
+  const onError = (data: FieldValues) => {
+    // alert('FAILED! ' + JSON.stringify(data));
+  };
+
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <Screen>
@@ -16,31 +27,66 @@ export const ContactPage = () => {
             Linking.openURL('mailto:support@barbago.com')
           }
         />
-        <List.Item
-          title="+1-234-567-8901"
-          left={(props) => <List.Icon icon="phone" {...props} />}
-          onPress={() => Linking.openURL('sms:+12345678901')}
-          // todo: open accordion and select tel: or sms:
-        />
+        <Menu
+          visible={showMenu}
+          onDismiss={() => {
+            setShowMenu(false);
+          }}
+          anchor={
+            <List.Item
+              title="+1-234-567-8901"
+              left={(props) => <List.Icon icon="phone" {...props} />}
+              onPress={() => setShowMenu(true)}
+            />
+          }
+        >
+          <Menu.Item
+            title="Text"
+            onPress={() => Linking.openURL('sms:+12345678901')}
+          />
+          <Menu.Item
+            title="Call"
+            onPress={() => Linking.openURL('tel:+12345678901')}
+          />
+        </Menu>
       </Card>
       <Card style={{ marginTop: 20 }}>
         <Card.Title title="Send us a message!" />
         <Card.Content>
-          <TextInput
+          <ValidTextInput
             label="Email Address"
-            value={email}
-            onChangeText={(email) => setEmail(email)}
+            name="emailAddress"
+            control={control}
+            rules={{
+              required: 'Email cannot be empty!',
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: 'Must be a valid email!',
+              },
+            }}
           />
-          <TextInput
+          <ValidTextInput
             label="Message"
-            value={message}
-            onChangeText={(message) => setMessage(message)}
             multiline
             numberOfLines={6}
+            name="message"
+            control={control}
+            rules={{
+              required: 'Message cannot be empty!',
+              minLength: {
+                value: 20,
+                message: 'Tell us a little bit more!',
+              },
+            }}
           />
         </Card.Content>
         <Card.Actions>
-          <Button icon="">Send Message</Button>
+          <Button
+            icon="send"
+            onPress={handleSubmit(onSubmit, onError)}
+          >
+            Send Message
+          </Button>
         </Card.Actions>
       </Card>
     </Screen>

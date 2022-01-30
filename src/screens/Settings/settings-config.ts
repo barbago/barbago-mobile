@@ -2,7 +2,6 @@ import { SettingsStackParamList } from '../../navigation';
 
 export interface SettingSection {
   title: string;
-  subtitle?: string;
   items: {
     title: string;
     subtitle?: string;
@@ -62,19 +61,18 @@ export const settingsConfig: SettingSection[] = [
         title: 'Terms of Service',
         leftIcon: 'file-document-edit',
         rightIcon: 'open-in-app',
-        link: 'https://barbagoapp.com/tos'
+        link: 'https://barbagoapp.com/tos',
       },
       {
         title: 'Privacy Policy',
         leftIcon: 'eye-off',
         rightIcon: 'open-in-app',
-        link: 'https://barbagoapp.com/privacy'
+        link: 'https://barbagoapp.com/privacy',
       },
     ],
   },
   {
     title: 'Earn with Barbago',
-    subtitle: '',
     items: [
       {
         title: 'Refer a user',

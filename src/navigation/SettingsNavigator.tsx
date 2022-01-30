@@ -1,9 +1,12 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootTabScreenProps, SettingsStackParamList } from './types';
-import { SettingsPage } from '../screens';
+import {
+  ContactPage,
+  NotificationsPage,
+  SettingsPage,
+} from '../screens';
 import { useAuth } from '../hooks';
-import { ContactPage } from '../screens/Settings/ContactPage';
 
 const Stack = createNativeStackNavigator<SettingsStackParamList>();
 
@@ -16,9 +19,13 @@ export function SettingsNavigator({
       <Stack.Screen
         name="Settings"
         component={SettingsPage}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, title: 'Settings' }}
       />
       <Stack.Screen name="Contact Us" component={ContactPage} />
+      <Stack.Screen
+        name="Notifications"
+        component={NotificationsPage}
+      />
     </Stack.Navigator>
   );
 }

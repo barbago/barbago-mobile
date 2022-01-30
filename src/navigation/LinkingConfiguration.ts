@@ -36,12 +36,14 @@ const linking: LinkingOptions<RootStackParamList> = {
             },
           },
           SettingsStack: {
+            initialRouteName: 'Settings',
             screens: {
               Settings: 'settings',
+              Account: 'account',
               'Contact Us': 'contact-us',
-              'Learn More': 'learn-more',
-              'Privacy Policy': 'privacy',
-              'Terms of Service': 'terms',
+              Notifications: 'notifications',
+              'Payment Details': 'payment-details',
+              Preferences: 'preferences',
             },
           },
         },

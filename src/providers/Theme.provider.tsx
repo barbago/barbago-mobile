@@ -10,33 +10,29 @@ import { useColorScheme } from '../hooks';
 export const ThemeProvider: React.FC = ({ children }) => {
   const scheme = useColorScheme();
 
-  /*
-https://buttercms.com/blog/implement-dark-mode-react-native
-const darkTheme = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "#1A1A1A",
-    accent: "#FAFAFA"
-  },
-};
+  // https://buttercms.com/blog/implement-dark-mode-react-native
+  const darkTheme = {
+    ...DarkTheme,
+    roundness: 2,
+    colors: {
+      ...DarkTheme.colors,
+      primary: '#FF0000',
+      accent: '#FAFAFA',
+    },
+  };
 
-const lightTheme = {
-  ...DefaultTheme,
-  roundness: 2,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: "#FAFAFA",
-    accent: "#1A1A1A",
-  },
-};
-*/
+  const lightTheme = {
+    ...DefaultTheme,
+    roundness: 2,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#FAFAFA',
+      accent: '#1A1A1A',
+    },
+  };
 
   return (
-    <PaperProvider
-      theme={scheme === 'dark' ? DarkTheme : DefaultTheme}
-    >
+    <PaperProvider theme={scheme === 'dark' ? darkTheme : lightTheme}>
       {children}
     </PaperProvider>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button } from 'react-native';
+import { Button } from 'react-native-paper';
 import { maybeCompleteAuthSession } from 'expo-web-browser';
 import { useIdTokenAuthRequest } from 'expo-auth-session/providers/google';
 import { useAuth } from '../../hooks';
@@ -27,7 +27,8 @@ export function GoogleAuth() {
       onPress={() => {
         promptAsync();
       }}
-      title="Signup with Google"
-    />
+    >
+      Signup with Google
+    </Button>
   );
 }

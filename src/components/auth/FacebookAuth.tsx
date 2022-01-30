@@ -2,7 +2,7 @@ import { ResponseType } from 'expo-auth-session';
 import { useAuthRequest } from 'expo-auth-session/providers/facebook';
 import { maybeCompleteAuthSession } from 'expo-web-browser';
 import React, { useEffect } from 'react';
-import { Button } from 'react-native';
+import { Button } from 'react-native-paper';
 import { useAuth } from '../../hooks';
 
 maybeCompleteAuthSession();
@@ -24,11 +24,12 @@ export const FacebookAuth = () => {
   return (
     <Button
       disabled={!request}
-      title="Continue with Facebook"
       onPress={() => {
         promptAsync();
       }}
-    />
+    >
+      Continue with Facebook
+    </Button>
   );
 };
 

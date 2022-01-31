@@ -74,7 +74,7 @@ export const AccountInfoPage = () => {
         <Card.Actions>
           <Button
             mode="contained"
-            disabled={!formState.isValid}
+            disabled={!formState.isDirty}
             onPress={handleSubmit(onSubmit)}
           >
             Update Information

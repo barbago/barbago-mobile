@@ -1,9 +1,14 @@
-import { FontAwesome } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import * as React from 'react';
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from '@expo/vector-icons';
+import {
+  BottomTabNavigationOptions,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
+import { RouteProp } from '@react-navigation/native';
+import React from 'react';
 
-import { Colors } from '../constants';
-import { useColorScheme } from '../hooks';
 import { RootTabParamList } from './types';
 import { HomePage, MessagePage, SearchPage } from '../screens';
 import { useAuth } from '../hooks';
@@ -16,42 +21,67 @@ export function TabNavigator({
   navigation,
 }: RootStackScreenProps<'Root'>) {
   const { user } = useAuth();
-  const colorScheme = useColorScheme();
 
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tabIconSelected,
-      }}
+      screenOptions={{ tabBarLabelPosition: 'below-icon' }}
     >
-      <Tab.Screen name="Home" component={HomePage} />
+      <Tab.Screen
+        name="Home"
+        component={HomePage}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="home"
+              color={color}
+              size={30}
+            />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Search"
         component={SearchPage}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="map-search"
+              color={color}
+              size={30}
+            />
+          ),
+        }}
       />
-      <Tab.Screen name="Messages" component={MessagePage} />
+      <Tab.Screen
+        name="Messages"
+        component={MessagePage}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="chat"
+              color={color}
+              size={30}
+            />
+          ),
+        }}
+      />
       <Tab.Screen
         name="SettingsStack"
         component={SettingsNavigator}
-        options={{ headerShown: false, title: 'Settings' }}
+        options={{
+          headerShown: false,
+          title: 'Settings',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="cog"
+              color={color}
+              size={30}
+            />
+          ),
+        }}
       />
     </Tab.Navigator>
-  );
-}
-
-
-
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return (
-    <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />
   );
 }

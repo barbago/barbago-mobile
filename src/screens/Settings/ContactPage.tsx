@@ -3,16 +3,14 @@ import { Linking } from 'react-native';
 import { useForm, FieldValues } from 'react-hook-form';
 import { Button, Card, List, Menu } from 'react-native-paper';
 import { Screen, ValidTextInput } from '../../components';
+import { useAuth } from '../../hooks';
 
 export const ContactPage = () => {
+  const { user } = useAuth();
   const { control, handleSubmit } = useForm();
 
   const onSubmit = (data: FieldValues) => {
     alert('SUCCESS! ' + JSON.stringify(data));
-  };
-
-  const onError = (data: FieldValues) => {
-    // alert('FAILED! ' + JSON.stringify(data));
   };
 
   const [showMenu, setShowMenu] = useState(false);
@@ -57,6 +55,7 @@ export const ContactPage = () => {
             label="Email Address"
             name="emailAddress"
             control={control}
+            defaultValue={user?.email ?? ''}
             rules={{
               required: 'Email cannot be empty!',
               pattern: {
@@ -81,10 +80,7 @@ export const ContactPage = () => {
           />
         </Card.Content>
         <Card.Actions>
-          <Button
-            icon="send"
-            onPress={handleSubmit(onSubmit, onError)}
-          >
+          <Button icon="send" onPress={handleSubmit(onSubmit)}>
             Send Message
           </Button>
         </Card.Actions>

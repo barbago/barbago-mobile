@@ -1,21 +1,32 @@
-import React, { useRef } from 'react';
-import { Modalize } from 'react-native-modalize';
-import { Text, Screen, Modal } from '../../components';
+import React from 'react';
+import { Screen } from '../../components';
 import { RootTabScreenProps } from '../../navigation/types';
+import { BarberResult } from '../../types';
 import { Map } from './Map';
+import { ResultModal } from './ResultModal';
 
-export const SearchPage: React.FC<RootTabScreenProps<'Search'>> = ({
-  children,
+const barbers: BarberResult[] = [
+  {
+    name: 'Giorgio',
+    location: 'Merrick',
+    cover: '',
+  },
+  {
+    name: 'AAAa',
+    location: 'AAAA',
+    cover: '',
+    rating: '5.0',
+    ratings: 10,
+  },
+];
+
+export const SearchPage = ({
   navigation,
-}) => {
-  const modalizeRef = useRef<Modalize>(null);
-
+}: RootTabScreenProps<'Search'>) => {
   return (
     <Screen edges={['top']} scrolling={false}>
       <Map />
-      <Modal ref={modalizeRef}>
-        <Text>AAA</Text>
-      </Modal>
+      <ResultModal barbers={barbers} />
     </Screen>
   );
 };

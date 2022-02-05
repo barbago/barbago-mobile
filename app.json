@@ -15,7 +15,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "plugins": [
       [
         "expo-image-picker",
@@ -44,7 +46,9 @@
     "web": {
       "build": {
         "babel": {
-          "include": ["react-leaflet"]
+          "include": [
+            "react-leaflet"
+          ]
         }
       },
       "favicon": "./src/assets/images/favicon.png"

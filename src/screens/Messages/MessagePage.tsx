@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, List } from 'react-native-paper';
-import { Screen, Text, View } from '../../components';
+import { Avatar, List, Text } from 'react-native-paper';
+import { Screen } from '../../components';
 import { RootTabScreenProps } from '../../navigation/types';
 import { useAuth } from '../../hooks';
 
@@ -10,16 +10,12 @@ export const MessagePage: React.FC<
   const { user } = useAuth();
   return (
     <Screen>
-      <Card>
-        <Card.Title title="aaaaaa" subtitle="bbbbbb" />
-      </Card>
-      <List.Section>
-        <List.Item
-          title="aaa"
-          left={(props) => <List.Icon {...props} icon="folder" />}
-        />
-      </List.Section>
-      <Text>Message Page</Text>
+      <List.Item
+        title="Giovanni Georgio"
+        description="Hey so we're still on for next week right?"
+        left={(props) => <Avatar.Text label="GG" {...props} />}
+        right={() => <Text>12/31/2021</Text>}
+      />
     </Screen>
   );
 };

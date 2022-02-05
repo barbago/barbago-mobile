@@ -14,8 +14,19 @@ const barbers: BarberResult[] = [
   {
     name: 'AAAa',
     location: 'AAAA',
-    cover: '',
-    rating: '5.0',
+    rating: '5.0 🌟',
+    ratings: 10,
+  },
+  {
+    name: 'AAAa',
+    location: 'AAAA',
+    rating: '5.0 🌟',
+    ratings: 10,
+  },
+  {
+    name: 'AAAa',
+    location: 'AAAA',
+    rating: '5.0 🌟',
     ratings: 10,
   },
 ];

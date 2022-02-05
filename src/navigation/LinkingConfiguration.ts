@@ -9,32 +9,18 @@ import * as Linking from 'expo-linking';
 
 import { RootStackParamList } from './types';
 
-const linking: LinkingOptions<RootStackParamList> = {
-  prefixes: [Linking.makeUrl('/')],
+export const linking: LinkingOptions<RootStackParamList> = {
+  prefixes: [Linking.createURL('/')],
   config: {
+    initialRouteName: 'Root',
     screens: {
-      Welcome: {
-        screens: {
-          Welcome: 'welcome',
-        },
-      },
+      Welcome: 'welcome',
+      Barber: 'barber/:id',
       Root: {
         screens: {
-          Home: {
-            screens: {
-              Home: 'home',
-            },
-          },
-          Search: {
-            screens: {
-              Search: 'search',
-            },
-          },
-          Messages: {
-            screens: {
-              Messages: 'messages',
-            },
-          },
+          Home: 'home',
+          Search: 'search',
+          Messages: 'messages',
           SettingsStack: {
             initialRouteName: 'Settings',
             screens: {
@@ -52,5 +38,3 @@ const linking: LinkingOptions<RootStackParamList> = {
     },
   },
 };
-
-export default linking;

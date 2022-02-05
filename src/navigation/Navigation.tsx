@@ -3,7 +3,7 @@ import React from 'react';
 import { ColorSchemeName } from 'react-native';
 import { dark, light } from '../constants';
 
-import LinkingConfiguration from './LinkingConfiguration';
+import { linking } from './LinkingConfiguration';
 import { RootNavigator } from './RootNavigator';
 
 export function Navigation({
@@ -13,7 +13,7 @@ export function Navigation({
 }) {
   return (
     <NavigationContainer
-      linking={LinkingConfiguration}
+      linking={linking}
       theme={colorScheme === 'dark' ? dark : light}
     >
       <RootNavigator />

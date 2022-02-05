@@ -9,8 +9,8 @@ interface ResultProps {
 export const Result = ({
   barber: {
     name,
-    cover,
     location,
+    cover = '',
     avatar = '',
     rating = 'n/a',
     ratings = 0,

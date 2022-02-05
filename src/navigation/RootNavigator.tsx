@@ -2,7 +2,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 
 import { RootStackParamList } from './types';
-import { NotFoundScreen, WelcomeSwiper } from '../screens';
+import {
+  BarberPage,
+  NotFoundScreen,
+  WelcomeSwiper,
+} from '../screens';
 import { TabNavigator } from './TabNavigator';
 import { useAuth } from '../hooks';
 
@@ -30,6 +34,7 @@ export function RootNavigator() {
         component={NotFoundScreen}
         options={{ title: 'Oops!' }}
       />
+      <Stack.Screen name="Barber" component={BarberPage} />
       {/* <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group> */}

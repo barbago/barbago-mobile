@@ -20,6 +20,7 @@ export type RootStackParamList = {
   Welcome?: undefined;
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   NotFound: undefined;
+  Barber: { id: string };
 };
 
 export type RootStackScreenProps<

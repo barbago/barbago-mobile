@@ -1,7 +1,7 @@
 export interface BarberResult {
   name: string;
-  cover: string;
   location: string;
+  cover?: string;
   avatar?: string;
   rating?: string;
   ratings?: number;

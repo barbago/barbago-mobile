@@ -8,17 +8,17 @@ import { StoreProvider } from './Store.provider';
 import { ThemeProvider } from './Theme.provider';
 
 export const ContextProvider: React.FC = ({ children }) => (
-  // <StoreProvider>
-  <AuthProvider>
-    <ActionSheetProvider>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <ThemeProvider>
-          <SafeAreaProvider>{children}</SafeAreaProvider>
-        </ThemeProvider>
-      </GestureHandlerRootView>
-    </ActionSheetProvider>
-  </AuthProvider>
-  // </StoreProvider>
+  <StoreProvider>
+    <AuthProvider>
+      <ActionSheetProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <ThemeProvider>
+            <SafeAreaProvider>{children}</SafeAreaProvider>
+          </ThemeProvider>
+        </GestureHandlerRootView>
+      </ActionSheetProvider>
+    </AuthProvider>
+  </StoreProvider>
 );
 
 export * from './Auth.provider';

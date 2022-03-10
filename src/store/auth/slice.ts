@@ -1,5 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { doSignIn, doSignOut } from './actions';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface AuthState {
   user: any;
@@ -12,14 +11,20 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(doSignIn, (state, action) => {});
-    builder.addCase(doSignOut, (state, action) => {
+  reducers: {
+    signIn(
+      state: AuthState,
+      action: PayloadAction<{ token: string }>,
+    ) {
+      action.payload.token;
+      state.user = !null;
+    },
+    signOut(state: AuthState) {
       state.user = null;
-    });
-    builder.addDefaultCase((state, _action) => state);
+    },
   },
 });
 
 export const { reducer: authReducer } = authSlice;
+
+export const { signOut, signIn } = authSlice.actions;

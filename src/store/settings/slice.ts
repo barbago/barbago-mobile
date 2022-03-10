@@ -1,40 +1,75 @@
-import { createSlice } from '@reduxjs/toolkit';
-
 import {
-  doSetNotificationMethod,
-  doToggleDarkMode,
-  doToggleNotifications,
-} from './actions';
+  createAction,
+  createAsyncThunk,
+  createSlice,
+} from '@reduxjs/toolkit';
+
+import { initialState } from './initialState';
+
+const reducerName = 'settings';
+
+type NotificationTypes = 'Appointment' | 'Messages' | 'Requests';
+
+type NotificationMethods = 'Text' | 'Email' | 'Push';
 
 export interface SettingsState {
   dark: boolean;
   notifsEnabled: boolean;
+  notifConfig: {
+    type: NotificationTypes;
+    methods: {
+      method: NotificationMethods;
+      active: boolean;
+      editable: boolean;
+    }[];
+  }[];
 }
 
-const initialState: SettingsState = {
-  dark: true,
-  notifsEnabled: true,
-};
+export const doToggleDarkMode = createAction<any>(
+  reducerName + '/toggleDarkMode',
+);
+
+export const doToggleNotificationMethod = createAction<any>(
+  reducerName + '/toggleNotificationMethod',
+);
+
+export const doToggleNotifications = createAction(
+  reducerName + '/toggleNotifications',
+);
+
+export const doFetchSettings = createAsyncThunk(
+  reducerName + '/fetchSettings',
+  async () => {
+    const res = (await (await fetch('aaa')).json()) as SettingsState;
+    return res;
+  },
+);
 
 export const settingsSlice = createSlice({
-  name: 'settings',
+  name: reducerName,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(doSetNotificationMethod, (state, action) => {})
-      .addCase(doToggleDarkMode, (state, action) => {
-        state.dark = !state.dark;
-      })
-      .addCase(doToggleNotifications, (state, action) => {
+    builder.addCase(doToggleDarkMode, (state, action) => {
+      state.dark = !state.dark;
+    }),
+      builder.addCase(
+        doToggleNotificationMethod,
+        (state, action) => {},
+      ),
+      builder.addCase(doToggleNotifications, (state, action) => {
         state.notifsEnabled = !state.notifsEnabled;
-      })
-      .addDefaultCase((state, _action) => state);
+      }),
+      builder.addCase(doFetchSettings.pending, (state, action) => {}),
+      builder.addCase(
+        doFetchSettings.fulfilled,
+        (state, action) => {},
+      ),
+      builder.addCase(
+        doFetchSettings.rejected,
+        (state, action) => {},
+      );
   },
 });
 
 export const { reducer: settingsReducer } = settingsSlice;
-
-// TODO:
-// Read Redux docs UI and Async sections
-// https://redux.js.org/tutorials/fundamentals/part-5-ui-react

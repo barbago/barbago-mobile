@@ -10,25 +10,19 @@ import {
 import { FirebaseError } from 'firebase/app';
 import {
   AuthCredential,
-  createUserWithEmailAndPassword,
   FacebookAuthProvider,
   GoogleAuthProvider,
   OAuthProvider,
   onAuthStateChanged,
   signInAnonymously,
   signInWithCredential,
-  signInWithEmailAndPassword,
   signOut as firebaseSignout,
   User,
 } from 'firebase/auth';
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
-import { auth } from '../config/firebase';
+import { auth } from '../config';
+import { authService } from '../services';
 
 const handleFirebaseError = (error: FirebaseError) => {
   let { message } = error;
@@ -63,7 +57,10 @@ const handleFirebaseError = (error: FirebaseError) => {
 const signInCredential = async (credential: AuthCredential) => {
   try {
     await signInWithCredential(auth, credential);
+    // @ts-ignore credential has hidden idToken
+    // authService.setToken(credential.idToken);
   } catch (err: any) {
+    // authService.setToken('');
     if (err instanceof FirebaseError) handleFirebaseError(err);
     else console.error(err);
   }
@@ -193,7 +190,6 @@ export const AuthProvider: React.FC = ({ children }) => {
       </AuthContext.Provider>
     );
 };
-
 
 /*
 TODO

@@ -4,7 +4,7 @@ import {
   Provider as PaperProvider,
   DarkTheme,
 } from 'react-native-paper';
-import { dark, light } from '../constants';
+import { dark, light } from '../config';
 
 import { useColorScheme } from '../hooks';
 

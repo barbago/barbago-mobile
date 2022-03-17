@@ -28,7 +28,7 @@ import React, {
   useState,
 } from 'react';
 
-import { auth } from '../constants/firebase';
+import { auth } from '../config/firebase';
 
 const handleFirebaseError = (error: FirebaseError) => {
   let { message } = error;

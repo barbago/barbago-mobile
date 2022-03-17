@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { ColorSchemeName } from 'react-native';
-import { dark, light } from '../constants';
+import { dark, light } from '../config';
 
 import { linking } from './LinkingConfiguration';
 import { RootNavigator } from './RootNavigator';

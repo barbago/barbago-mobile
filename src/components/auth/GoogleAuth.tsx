@@ -11,7 +11,7 @@ export function GoogleAuth() {
   const { signInGoogle } = useAuth();
   const [request, response, promptAsync] = useIdTokenAuthRequest({
     clientId:
-      '826208380986-b35gmhcidcsm9415okp8tj8nrj63ehhr.apps.googleusercontent.com',
+      '98881312343-921jrliba5991ah5g3pimfg9k3e2029j.apps.googleusercontent.com',
   });
 
   useEffect(() => {

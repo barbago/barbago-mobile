@@ -1,20 +1,19 @@
-import * as firebase from 'firebase/app';
+import { initializeApp } from 'firebase/app';
+import { getAnalytics } from 'firebase/analytics';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAgywKWJLKl3ohclOD1nk0JUqAUJBL61y4',
-  authDomain: 'barbago-859cf.firebaseapp.com',
-  projectId: 'barbago-859cf',
-  storageBucket: 'barbago-859cf.appspot.com',
-  messagingSenderId: '826208380986',
-  appId: '1:826208380986:web:8e9c0021ab5e4b4f1d2d03',
-  measurementId: 'G-D2FNWDVLC6',
+  apiKey: 'AIzaSyCgaQWRG-hIyv1hZXYZ8sq8jGSEuDzAkjg',
+  authDomain: 'barbago-dev.firebaseapp.com',
+  projectId: 'barbago-dev',
+  storageBucket: 'barbago-dev.appspot.com',
+  messagingSenderId: '98881312343',
+  appId: '1:98881312343:web:2558cf7dcedbb3892f7512',
+  measurementId: 'G-QKKBRRQC54',
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-const auth = getAuth(firebaseApp);
-const db = getFirestore(firebaseApp);
-
-export { firebase, firebaseApp, auth, db };
+export const firebaseApp = initializeApp(firebaseConfig);
+export const analytics = getAnalytics(firebaseApp);
+export const auth = getAuth(firebaseApp);
+export const db = getFirestore(firebaseApp);
